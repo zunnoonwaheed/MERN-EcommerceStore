@@ -1,14 +1,11 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import App from "./App.jsx";
-import "./index.css";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
+import AdminApp from './AdminApp'; // Import the simplified admin app
 
-import { BrowserRouter } from "react-router-dom";
-
-createRoot(document.getElementById("root")).render(
-	<StrictMode>
-		<BrowserRouter>
-			<App />
-		</BrowserRouter>
-	</StrictMode>
+ReactDOM.render(
+    <BrowserRouter>
+        <AdminApp />
+    </BrowserRouter>,
+    document.getElementById('root')
 );

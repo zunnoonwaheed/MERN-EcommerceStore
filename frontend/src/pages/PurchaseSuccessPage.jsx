@@ -2,8 +2,9 @@ import { ArrowRight, CheckCircle, HandHeart } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useCartStore } from "../stores/useCartStore";
-import axios from "../lib/axios";
+
 import Confetti from "react-confetti";
+import axios from "axios";
 
 const PurchaseSuccessPage = () => {
 	const [isProcessing, setIsProcessing] = useState(true);
@@ -13,12 +14,15 @@ const PurchaseSuccessPage = () => {
 	useEffect(() => {
 		const handleCheckoutSuccess = async (sessionId) => {
 			try {
-				await axios.post("/payments/checkout-success", {
-					sessionId,
-				});
+				await axios.post(
+					"http://localhost:8000/api/payments/checkout-success",
+					{ sessionId },
+					{ withCredentials: true }  // Include cookies with the request
+				);
 				clearCart();
 			} catch (error) {
 				console.log(error);
+				setError("Error processing payment");
 			} finally {
 				setIsProcessing(false);
 			}
@@ -97,3 +101,4 @@ const PurchaseSuccessPage = () => {
 	);
 };
 export default PurchaseSuccessPage;
+
